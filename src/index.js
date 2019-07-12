@@ -77,8 +77,8 @@ class C3Chart extends React.Component {
     this.chart.load(data);
   }
 
-  unloadData() {
-      this.chart.unload();
+  unloadData(unloadConfig) {
+      this.chart.unload(unloadConfig);
   }
 
   updateChart(config) {
@@ -87,10 +87,13 @@ class C3Chart extends React.Component {
     }
 
     if (config.unloadBeforeLoad) {
-        this.unloadData();
+        this.unloadData({
+          done: () => {
+            this.loadNewData(config.data);
+        }});
+    } else {
+      this.loadNewData(config.data);
     }
-
-    this.loadNewData(config.data);
   }
 
   render() {

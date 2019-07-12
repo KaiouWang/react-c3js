@@ -78,21 +78,26 @@ var C3Chart = function (_React$Component) {
     }
   }, {
     key: 'unloadData',
-    value: function unloadData() {
-      this.chart.unload();
+    value: function unloadData(unloadConfig) {
+      this.chart.unload(unloadConfig);
     }
   }, {
     key: 'updateChart',
     value: function updateChart(config) {
+      var _this2 = this;
+
       if (!this.chart) {
         this.chart = this.generateChart((0, _reactDom.findDOMNode)(this), config);
       }
 
       if (config.unloadBeforeLoad) {
-        this.unloadData();
+        this.unloadData({
+          done: function done() {
+            _this2.loadNewData(config.data);
+          } });
+      } else {
+        this.loadNewData(config.data);
       }
-
-      this.loadNewData(config.data);
     }
   }, {
     key: 'render',
