@@ -4,6 +4,10 @@
 
 React component for [C3.js](http://c3js.org/). ([Demo])
 
+This folk fixed an issue where chart unloading didn't finish properly before new data starts rendering.
+
+> If you call load API soon after/before unload, unload param of load should be used. Otherwise chart will not be rendered properly because of cancel of animation. [link](https://c3js.org/reference.html#api-unload)
+
 ![screenshot](screenshot.png)
 
 ```javascript
